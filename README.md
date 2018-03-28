@@ -67,7 +67,9 @@ to take that into account and render as lazily as possible.
     <RenderInStack
         instanceId="myStackDrawer"      // (optional)  ID of the stacker instance you to render this in
         id="unique-id-for-this-stack"   // Unique ID for this stack
-    />
+    >
+        {/* Children to render in the target StackRenderer */}
+    </RenderInStack>
 ```
 
 ## Example
