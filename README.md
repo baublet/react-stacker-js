@@ -7,6 +7,10 @@ features (useable only if you're using ReactDOM).
 It works a lot like a router, but with no need to specify routes up front, so that developers
 can declaratively hoist pieces of UI to certain parts of their component tree.
 
+**Terminology**
+* Stack -- a first-in, last-out list of component trees to be rendered in arbitrary locations via the `StackRenderer` component
+* Stack Item (or just item) -- a stack is made out of stack items, which are the component trees defined under the `RenderInStack` component
+
 ## How does it work?
 
 There are two main components.
