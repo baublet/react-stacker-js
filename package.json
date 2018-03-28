@@ -1,0 +1,38 @@
+{
+  "name": "react-stacker",
+  "version": "0.1.0",
+  "description": "React component for stacking different views and navigating back and forth between them, similar to a router",
+  "main": "src/index.js",
+  "keywords": [
+    "react",
+    "component",
+    "navigation",
+    "routing"
+  ],
+  "author": "Ryan M. Poe",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^22.4.3",
+    "react-dom": "^16.2.0",
+    "webpack": "^4.3.0",
+    "webpack-cli": "^2.0.13"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "build:dev": "webpack --config webpack.config.js --mode development",
+    "watch:dev": "npm run build:dev -- --watch",
+    "build:demo": "webpack --config webpack.config.demo.js --mode development",
+    "watch:demo": "npm run build:demo -- --watch",
+    "release:major": "npm run build && git commit -a -m \"Increment and release major\" && npm version major && npm publish && git push",
+    "release:minor": "npm run build && git commit -a -m \"Increment and release minor\" && npm version minor && npm publish && git push",
+    "release:patch": "npm run build && git commit -a -m \"Increment and release patch\" && npm version patch && npm publish && git push"
+  }
+}
