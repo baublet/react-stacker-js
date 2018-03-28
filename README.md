@@ -167,3 +167,22 @@ stack ID for your stack renderer:
 Then, when you need to load your asyncronous component, just call
 `this.setState({ currentId: "loading" })` until the component is done loading,
 then set the current stack ID to the new one to render.
+
+### Back and Forth on the Stack
+
+It's not a stack without the ability to go back and forth through it! To gain
+more granular control over your stack renderer, snag a reference to it via the
+React Refs API:
+
+```jsx
+    // In some component
+    <StackRenderer ref={stackRenderer => this.stackRenderer = stackRenderer} />
+```
+
+Now you have access to the public methods of the StackRenderer:
+
+```
+    goBack()        // Goes to the previous route, if possible
+    goForward()     // Goes to the next route, if possible
+    clearHistory()  // Clears the history of the stack, leaving only the current stack shown
+```
