@@ -182,7 +182,7 @@ React Refs API:
 Now you have access to the public methods of the StackRenderer:
 
 ```
-    goBack()        // Goes to the previous route, if possible
-    goForward()     // Goes to the next route, if possible
+    goBack()        // Goes to the previous stack item, if possible
+    goForward()     // Goes to the next stack item, if possible
     clearHistory()  // Clears the history of the stack, leaving only the current stack shown
 ```
