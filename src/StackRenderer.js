@@ -1,20 +1,34 @@
+// @flow
+
 import React, { Component } from "react"
 import { DEFAULT_INSTANCE_ID, globalContext } from "./index.js"
 
-export default class StackRenderer extends Component {
-    constructor(props) {
+type propTypes = {
+    currentId: string | number,
+    instanceId?: string | number
+}
+
+type stateTypes = {
+    currentId: string | number
+}
+
+export default class StackRenderer extends Component<propTypes, stateTypes> {
+    idHistory: Array<number | string>
+    currentIndex: number
+    rerenderTimer: null | TimeoutID
+    constructor(props: propTypes) {
         super(props)
         this.idHistory = []
-        this.currentId = null
+        this.currentIndex = 0
         if(props.currentId) {
             this.idHistory.push(props.currentId)
-            this.currentId = 0
+            this.currentIndex = 0
             this.state = { currentId: props.currentId }
         }
         this.scheduleRerender()
     }
     
-    scheduleRerender(poll = 10) {
+    scheduleRerender(poll: number = 10) {
         if(this.rerenderTimer) {
             return
         }
@@ -25,32 +39,31 @@ export default class StackRenderer extends Component {
     }
     
     clearHistory() {
-        this.idHistory = this.idHistory.slide(-1)
-        this.currentId = 0
+        this.idHistory = this.idHistory.slice(-1)
+        this.currentIndex = 0
     }
     
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: propTypes) {
         if(nextProps.currentId !== this.props.currentId) {
             this.idHistory.push(nextProps.currentId)
-            this.currentId = this.idHistory.length - 1
-            console.log(this.idHistory)
-            this.setState({ currentId: this.idHistory[this.currentId] }, () => {
+            this.currentIndex = this.idHistory.length - 1
+            this.setState({ currentId: this.idHistory[this.currentIndex] }, () => {
                 this.scheduleRerender()
             })
         }
     }
     
     goBack() {
-        if(this.currentId > 0) {
-            this.currentId = this.currentId - 1
-            this.setState({ currentId: this.idHistory[this.currentId] })
+        if(this.currentIndex > 0) {
+            this.currentIndex = this.currentIndex - 1
+            this.setState({ currentId: this.idHistory[this.currentIndex] })
         }
     }
     
     goForward() {
-        if(this.currentId < this.idHistory.length - 1) {
-            this.currentId = this.currentId + 1
-            this.setState({ currentId: this.idHistory[this.currentId] })
+        if(this.currentIndex < this.idHistory.length - 1) {
+            this.currentIndex = this.currentIndex + 1
+            this.setState({ currentId: this.idHistory[this.currentIndex] })
         }
     }
 

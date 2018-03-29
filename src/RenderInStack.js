@@ -1,8 +1,16 @@
+// @flow
+
 import React, { Component } from "react"
 import { DEFAULT_INSTANCE_ID, globalContext } from "./index.js"
 
-export default class RenderInStack extends Component {
-    constructor(props) {
+type propTypes = {
+    id: string | number,
+    instanceId?: string | number,
+    children?: any
+}
+
+export default class RenderInStack extends Component<propTypes> {
+    constructor(props: propTypes) {
         super(props)
         const { id, instanceId = DEFAULT_INSTANCE_ID } = props
         if(!globalContext[instanceId]) {
